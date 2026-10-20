@@ -1,0 +1,3 @@
+export const categories=['Casa','Spesa','Trasporti','Salute','Tempo libero','Altro'];
+export function totals(items){return items.reduce((a,t)=>{a[t.type]+=t.amount;return a;},{income:0,expense:0});}
+export function validate(data){return data&&Array.isArray(data.transactions)&&data.transactions.every(t=>t&&typeof t.id==='string'&&['income','expense'].includes(t.type)&&Number.isFinite(t.amount)&&t.amount>0&&typeof t.description==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(t.date)&&!Number.isNaN(Date.parse(t.date))&&categories.includes(t.category))&&data.budgets&&Object.entries(data.budgets).every(([k,v])=>categories.includes(k)&&Number.isFinite(v)&&v>=0);}

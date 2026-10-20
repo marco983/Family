@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: nido-budget
+    runtime: node
+    plan: free
+    buildCommand: npm test
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: 24.19.0
